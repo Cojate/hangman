@@ -3,6 +3,7 @@
 import string
 from os import system
 from art import *
+from time import sleep
 
 
 # global variable to keep track of misses
@@ -47,6 +48,7 @@ def blanks(letters):
 
 def guess():
 	
+	system('clear')
 	hangman(misses)
 	
 	print "Misses: ", misses
@@ -77,15 +79,13 @@ def guess():
 		global misses
 		misses += 1
 
-	print "".join(guess_array)
+	#print "".join(guess_array)
 
 if __name__=="__main__":
 
 	system('clear')
 	
 	title()
-	print ""
-	print "One of you shoud look away"
 	print "What is the phrase to be guessd??"
 	
 	word = raw_input("> ")
@@ -97,6 +97,16 @@ if __name__=="__main__":
 	while "-" in guess_array:
 		guess()
 		system('clear')
+		if misses == 5:
+			hangman(misses)
+			break
+
+	print "The phrase was: " , "".join(word_array)
+	print ""
+	print "Thanks for playing..."
+	title()
+
+
 
 
 
