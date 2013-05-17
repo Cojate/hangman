@@ -1,5 +1,31 @@
+# Add option to to guess word 
+
 import string
 from os import system
+from art import *
+
+
+# global variable to keep track of misses
+misses = 0
+
+""" 
+#punc = []
+#for symbol in string.punctuation:
+#	punc.append(symbol)
+
+
+# To be implemented later 
+
+def punc_check(phrase)
+test = False
+while test == False:
+	word = raw_input(prompt)
+	for letter in word:
+		if letter in punc:
+			print "No symbols please."
+		else:
+			test = True
+"""
 
 def prepare(phrase):
 	array = []
@@ -18,8 +44,12 @@ def blanks(letters):
 			guess_array.append("-")
 	return guess_array
 
+
 def guess():
 	
+	hangman(misses)
+	
+	print "Misses: ", misses
 	print ""
 	print "".join(guess_array)
 	print ""
@@ -36,19 +66,25 @@ def guess():
 			print "Only one letter please."
 			print ""
 
-	check_array = guess_array
+	# creates array to check if guess is contained in word_array
+	check_array = guess_array[:]
 
 	for i in range(len(word_array)):
 		if guess == word_array[i]:
 			guess_array[i] = guess
-	print "".join(guess_array)
 
+	if guess_array == check_array:
+		global misses
+		misses += 1
+
+	print "".join(guess_array)
 
 if __name__=="__main__":
 
 	system('clear')
 	
-	print "Welcome to Hangman"
+	title()
+	print ""
 	print "One of you shoud look away"
 	print "What is the phrase to be guessd??"
 	
@@ -61,4 +97,6 @@ if __name__=="__main__":
 	while "-" in guess_array:
 		guess()
 		system('clear')
+
+
 
